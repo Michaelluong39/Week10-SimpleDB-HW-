@@ -24,16 +24,26 @@ public class Main {
         for(Movie movie : theMovies){
             System.out.println(movie.toString());
         }
+        System.out.println("\n");
 
         while(add == 1) {
             loop = view.yesNo();
-            if (loop.equals("y")) {
-                title = view.addMovie("title");
-                year = view.addMovie("release year");
-                rate = view.addMovie("maturity rating");
-                db.addData(title, year, rate);
-            }else {
-                break;
+
+            switch (loop) {
+                case "a":
+                    title = view.addMovie("title");
+                    year = view.addMovie("release year");
+                    rate = view.addMovie("maturity rating");
+                    db.addData(title, year, rate);
+                    break;
+
+                case "s":
+                    db.searchData();
+                    break;
+
+                default:
+                    System.out.println("Exiting program\n");
+                    System.exit(0);
             }
             }
 

@@ -9,7 +9,7 @@ public class UserDataInput {
     }
 
     public String yesNo() {
-        System.out.print("Would you like to add a movie to the list? ('y' for yes, else exit program): ");
+        System.out.print("What would you like to do? (a=add movie, s=search movies): ");
         Scanner input = new Scanner(System.in);
 
         return input.next();
@@ -17,6 +17,13 @@ public class UserDataInput {
 
     public String addMovie(String a) {
         System.out.println("Please enter the movie's " + a + ": ");
+        Scanner input = new Scanner(System.in);
+
+        return input.next();
+    }
+
+    public String searchMovies() {
+        System.out.println("Enter the title you want to search for(case sensitive): ");
         Scanner input = new Scanner(System.in);
 
         return input.next();

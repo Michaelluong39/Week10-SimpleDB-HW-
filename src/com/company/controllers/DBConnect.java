@@ -1,6 +1,7 @@
 package com.company.controllers;
 
 import com.company.models.Movie;
+import com.company.views.UserDataInput;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -9,6 +10,7 @@ public class DBConnect {
 
     private String dbName;
     private String url;
+    public static UserDataInput ud;
 
     public DBConnect(String dbName) {
         this.dbName = dbName;
@@ -61,6 +63,28 @@ public class DBConnect {
             e.printStackTrace();
         }
 
+    }
+
+    public void searchData() {
+        ud = new UserDataInput();
+        String search = ud.searchMovies();
+        String sql = "SELECT title, releaseDate, rating FROM movies WHERE title = '" + search + "' ";
+        ArrayList<Movie> movieList = new ArrayList<Movie>();
+
+        try (Connection conn = DriverManager.getConnection(url)) {
+            Statement statement = conn.createStatement();
+            ResultSet movies = statement.executeQuery(sql);
+            while(movies.next()) {
+                String title = movies.getString("title");
+                String releaseDate = movies.getString("releaseDate");
+                String rating = movies.getString("rating");
+                System.out.println("Movie found:\nTitle: " + title + " released on "  + releaseDate + " rated " + rating);
+
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public ArrayList<Movie> getData(){
